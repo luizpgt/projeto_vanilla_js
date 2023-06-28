@@ -181,5 +181,15 @@ function hideOrShowQuizz() {
   scoreContainer.classList.toggle("hide");
 }
 
+// reiniciar quizz
+const restartBtn = document.querySelector("#restart");
+restartBtn.addEventListener("click", function () {
+  // zerar o jogo
+  actualQuestion = 0;
+  points = 0;
+  hideOrShowQuizz();
+  init();
+});
+
 // inicializacao do quizz
 init();
