@@ -90,7 +90,35 @@ function createQuestion (i) {
 
   questionText.textContent = questions[i].question;
   questionNumber.textContent = i + 1;
+  
+  // insere alternativas 
+  questions[i].answers.forEach(function(answer, i) {
+    const answerTemplate = document.querySelector(".answer-template").cloneNode(true);
 
+    const letterBtn = answerTemplate.querySelector(".btn-letter");
+    const answerText = answerTemplate.querySelector(".question-answer");
+
+    letterBtn.textContent = letters[i];
+    answerText.textContent = answer['answer'];
+
+    answerTemplate.setAttribute("correct-answer", answer["correct"]); //colore coforme acertos
+
+    // remover hide and template class
+    answerTemplate.classList.remove("hide");
+    answerTemplate.classList.remove("answer-template");
+
+    // inserir a alterantiva na tela
+    answersBox.appendChild(answerTemplate);
+
+    // insere um evento de click no botão 
+    answerTemplate.addEventListener("click", function () {
+      console.log(this);
+    })
+  });
+
+  // incrementa o numero da questão
+  actualQuestion++;
 }
+
 // inicializacao do quizz
 init();
