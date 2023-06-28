@@ -112,7 +112,7 @@ function createQuestion (i) {
 
     // insere um evento de click no botão 
     answerTemplate.addEventListener("click", function () {
-      console.log(this);
+      checkAnswer(this);
     })
   });
 
@@ -120,5 +120,38 @@ function createQuestion (i) {
   actualQuestion++;
 }
 
+// verificando responsta do usuario 
+function checkAnswer(btn) {
+  const buttons = answersBox.querySelectorAll("button"); // somente os botoes da div answersBox
+
+  // adiciona classes aos botoes
+  buttons.forEach (function (button) {
+    if (button.getAttribute("correct-answer") == "true") {
+      button.classList.add("correct-answer");
+
+      // checa se usuario acertou a resposta
+      if (btn == button) {
+        // incremento dos pontos
+        points++;
+      }
+    } else {
+      button.classList.add("wrong-answer");
+    }
+  });
+
+  // exibir proxima pergunta
+  nextQuestion();
+}
+
+// exibe proxima pergunta
+function nextQuestion() {
+  // timer para usuario ver as respostas
+  setTimeout(function () {
+    if (actualQuestion >= questions.length) {
+      // apresenta mensagem de sucesso
+    }
+    createQuestion(actualQuestion);
+  }, 1500);
+}
 // inicializacao do quizz
 init();
